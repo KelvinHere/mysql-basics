@@ -58,6 +58,7 @@ Order results by column, example
 
 ## Count
 `select count(SupportRepId) as SupportRep4Clients from Customer where SupportRepId = 4;` Count the number of SupportRepIds where the SupportRep has a value of 4.
+`select count(City) from Customer where City = 'Berlin';` - Counts customers in Berlin.
 
 `select Employee.FirstName as RepFirstName, Employee.LastName as RepLastName, count(Customer.SupportRepId) from Employee inner join Customer on Employee.EmployeeId = Customer.SupportRepId where Employee.FirstName = 'Jane' and Employee.LastName = 'Peacock';` - Counts all instances of customers whos rep is called Joan Peacock
 
@@ -67,6 +68,24 @@ Order results by column, example
 `select avg(Total) from Invoice` - Returns average value of totals from invoice table
 `select round(avg(Total),2) from Invoice` - Same as above but rounds to 2 decimal places
 `select sum(UnitPrice * Quantity) from InvoiceLine where InvoiceId = 2;` - Sum function returns sum in this case from InvoiceLine2
+`select Track.Name, sum(InvoiceLine.UnitPrice * InvoiceLine.Quantity) from Track inner join InvoiceLine on Track.TrackId = InvoiceLine.TrackId where Track.Name = "The Woman King"` Sum of all of this track sales
+
+## Group by
+select Album.Title, count(*) from Track
+inner join Album on Track.AlbumId = Album.AlbumId
+group by Track.AlbumId;
+
+* This groups by album id. the output is Album name along with a count of identical AlbumIds on each track
+
+select AlbumId, min(UnitPrice) from Track
+group by AlbumId;
+
+* This groups all items with the same AlbumId and returns the ones with the cheapest UnitPrice - You could join Album onto Track to pull the album name instead of just the Id for this
+
+select AlbumId, round(sum(UnitPrice), 2) from Track
+group by AlbumId;
+
+* This will group all AlbumIds and calculate the sum of each
 
 C2
 `select Track.Name as TrackName, Genre.Name as GenreType from Track inner join Genre on Track.GenreId = Genre.GenreId where Genre.Name = 'Jazz';`
