@@ -61,6 +61,13 @@ Order results by column, example
 
 `select Employee.FirstName as RepFirstName, Employee.LastName as RepLastName, count(Customer.SupportRepId) from Employee inner join Customer on Employee.EmployeeId = Customer.SupportRepId where Employee.FirstName = 'Jane' and Employee.LastName = 'Peacock';` - Counts all instances of customers whos rep is called Joan Peacock
 
+## MIN / MAX / Average / Round / SUM
+`select min(LastName) from Customer` - selects the min value from the column
+`select max(ID) from Numbers` - selects the max value from the column
+`select avg(Total) from Invoice` - Returns average value of totals from invoice table
+`select round(avg(Total),2) from Invoice` - Same as above but rounds to 2 decimal places
+`select sum(UnitPrice * Quantity) from InvoiceLine where InvoiceId = 2;` - Sum function returns sum in this case from InvoiceLine2
+
 C2
 `select Track.Name as TrackName, Genre.Name as GenreType from Track inner join Genre on Track.GenreId = Genre.GenreId where Genre.Name = 'Jazz';`
 Selects track name and genre type, filters all but Jazz genre.
@@ -70,6 +77,3 @@ C3 - Multiple where clauses
 
 C4 - Show Playlist, Trackname, Album on Grunge Playlist
 `select Playlist.Name as PlayListName, Track.Name as Track, Album.Title as Album from Playlist inner join PlaylistTrack on Playlist.PlaylistId = PlaylistTrack.PlaylistId inner join Track on PlaylistTrack.TrackId = Track.TrackId inner join Album on Track.AlbumId = Album.AlbumId where Playlist.Name = 'Grunge';`
-
-C5 - In progress
-`select Playlist.PlaylistId as ID, PlaylistTrack.TrackId as TrackName, Track.Name as Track from Playlist inner join PlaylistTrack on Playlist.PlaylistId = PlaylistTrack.PlaylistId inner join Track on PlaylistTrack.TrackId = Track.TrackId where Playlist.PlaylistId < 2;`
