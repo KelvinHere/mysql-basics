@@ -34,3 +34,20 @@ A repo to learn MySql basics.
 
 ## Delete command
 `delete from TableName where Name = ‘Record’;` deletes 'Record' record from TableName
+
+## Where filter
+Can be used with select/update/delete example
+
+`select * from Track where Composer = 'U2'`
+
+## Aliases
+Change the name of a column for your own purpose so data makes more sense, ie,
+
+`select Name as Track, Title as Album from Track;` - will display name as track and title as album
+
+## Join
+Example
+
+`select Track.Name as Track, MediaType.Name as Media from Track inner join MediaType on Track.MediaTypeId = MediaType.MediaTypeId;`
+
+Joins MediaType to Track through the use of MediaTypeId which is a column in common on both tables and renames both colums with aliases
