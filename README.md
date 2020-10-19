@@ -37,8 +37,10 @@ A repo to learn MySql basics.
 
 ## Where filter
 Can be used with select/update/delete example
-
 `select * from Track where Composer = 'U2'`
+
+`Select AlbumID from Album where Title = "Boy"` - Gives AlbumId from Album from given Title
+
 
 ## Aliases
 Change the name of a column for your own purpose so data makes more sense, ie,
@@ -87,6 +89,26 @@ group by AlbumId;
 
 * This will group all AlbumIds and calculate the sum of each
 
+## Insert
+insert into MediaType (Name) values ("Test Media Type 1");
+- Will create a new media type "Test Media Type 1" into the MediaType table
+
+insert into Album (Title, ArtistId)
+values ("Boy", 150);
+- Will insert Title-Boy ArtistId-150 into Album table cols
+
+## Multiple Inserts
+INSERT INTO 
+	projects(name, start_date, end_date)
+VALUES
+	('AI for Marketing','2019-08-01','2019-12-31'),
+	('ML for Sales','2019-05-15','2019-11-20');
+    ...
+    ...
+    ...
+    
+
+
 C2
 `select Track.Name as TrackName, Genre.Name as GenreType from Track inner join Genre on Track.GenreId = Genre.GenreId where Genre.Name = 'Jazz';`
 Selects track name and genre type, filters all but Jazz genre.
@@ -96,3 +118,11 @@ C3 - Multiple where clauses
 
 C4 - Show Playlist, Trackname, Album on Grunge Playlist
 `select Playlist.Name as PlayListName, Track.Name as Track, Album.Title as Album from Playlist inner join PlaylistTrack on Playlist.PlaylistId = PlaylistTrack.PlaylistId inner join Track on PlaylistTrack.TrackId = Track.TrackId inner join Album on Track.AlbumId = Album.AlbumId where Playlist.Name = 'Grunge';`
+
+Complexish - Joins Track to Album to Artist, groups all AlbumIds together, orders by the count of ArtistId adescending and limits to 5 results
+select Artist.Name, count(Album.ArtistId) from Track
+inner join Album on Track.AlbumId = Album.AlbumId
+inner join Artist on Album.ArtistId = Artist.ArtistId
+group by Album.ArtistId 
+order by count(Album.ArtistId) desc
+limit 5;
