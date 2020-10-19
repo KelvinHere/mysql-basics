@@ -2,6 +2,9 @@
 
 A repo to learn MySql basics.
 
+## Create database from .sql script file
+mysql -v < Filename.sql
+
 ## Simple commands
 
 * `mysql` to enter MySql CLI
@@ -106,7 +109,7 @@ VALUES
     ...
     ...
     ...
-    
+
 
 
 C2
